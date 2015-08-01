@@ -49,13 +49,13 @@ Installing
 Usage
 -----
 
+Add sun in your windows manager session startup.
+
+As for xfce:
+Settings Manager --> Session and Startup --> Application Autostart --> +Add
+
 .. code-block:: bash
 
-    Add sun in your windows manager session startup.
-    
-    As for xfce:
-    Settings Manager --> Session and Startup --> Application Autostart --> +Add
-    
     Name: sun
     Description: Slackware Update Notifier
     Command: /usr/bin/sun start --gtk
