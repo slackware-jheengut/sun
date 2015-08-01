@@ -151,5 +151,3 @@ def os_info():
         "Packages: {6}".format(getpass.getuser(), slack, ver, stype,
                                os.uname()[4], os.uname()[2], ins_packages()))
     return info
-
-slack_ver()
