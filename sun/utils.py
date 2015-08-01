@@ -57,8 +57,13 @@ def read_file(registry):
 def slack_ver():
     """Open file and read Slackware version
     """
-    sv = read_file("/etc/slackware-version")
-    return sv.split()[0], (".".join(re.findall(r"\d+", sv)))
+    dist = read_file("/etc/slackware-version")
+    sv = re.findall(r"\d+", dist)
+    if len(sv) > 2:
+        version = (".".join(sv[:2]))
+    else:
+        version = (".".join(sv))
+    return dist.split()[0], version
 
 
 def ins_packages():
@@ -146,3 +151,5 @@ def os_info():
         "Packages: {6}".format(getpass.getuser(), slack, ver, stype,
                                os.uname()[4], os.uname()[2], ins_packages()))
     return info
+
+slack_ver()
