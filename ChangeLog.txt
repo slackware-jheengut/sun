@@ -1,71 +1,68 @@
-10-06-2015
-Version 1.1.0
+1.1.1 - 01/08/2015
+Fixed:
+- Support old Slackware versions
+Updated:
+- SlackBuild script
 
-[Updated] - Add preserve_perms to doinst.sh. Thanks to Thibaut Notteboom.
-	      - Add submenu gtk icons.
-		  - Doc strings.
-		  - Tooltip message.
-		  - Merge added packages in count.
+1.1.0 - 10/06/2015
+Added:
+- Preserve_perms to doinst.sh. Thanks to Thibaut Notteboom
+- Submenu gtk icons
+Fixed:
+- Doc strings
+- Tooltip message
+- Merge added packages in count
 
-15-05-2015
-Version 1.0.9
+1.0.9 - 15/05/2015
+Fixed:
+- Messages and added status icon message
+Updated:
+- CLI tool
+Added:
+- User name in info
 
-[Updated] - Fix messages and added status icon message.
-		  - Update CLI tool.
-		  - Added user name in info.
+1.0.8 - 23/04/2015
+Added:
+- Counted new packages added
 
-23-04-2015
-Version 1.0.8
+1.0.71 - 16/04/2015
+Fixed:
+- License
 
-[Feature] - Added counted new packages added.
+1.0.7 - 15/04/2015
+Updated:
+- Merge license to about
 
-16-04-2015
-Version 1.0.71
+1.0.6 - 31/03/2015
+Fixed:
+- Daemon loop wait one second before connect to ISP
 
-[Updated] - Fix license.
+1.0.5 - 20/03/2015
+Fixed:
+- Ignore current in information
+Updated:
+- Update CLI tool
 
-15-04-2015
-Version 1.0.7
+1.0.4 - 18/03/2015
+Added:
+- Information, license and update gtk.MessageBox
 
-[Updated] - Merge license to about.
+1.0.3 - 14/03/2015
+Fixed:
+- BugFix with slackpkg+ update. Thanks to Maciej Gołuchowski for report
+- BugFix gtk display large number of packages
 
-31-03-2015
-Version 1.0.6
+1.0.2 - 14/03/2015
+Added:
+- Gtk status icon with popup menu
 
-[Updated] - Fix daemon loop wait 1 second before connect to ISP.
+1.0.1 - 11/03/2015
+Updated:
+- CLI options
+Added:
+- Check software updates
+- Display upgraded or rebuilt packages
 
-20-03-2015
-Version 1.0.5
-
-[Updated] - Fix ignore current in information.
-		  - Update CLI tool.
-
-18-03-2015
-Version 1.0.4
-
-[Updated] - Added information, license and update gtk.MessageBox.
-
-14-03-2015
-Version 1.0.3
-
-[Updated] - BugFix with slackpkg+ update. Thanks to Maciej Gołuchowski 
-		  - for report.
-		  - BugFix gtk display large number of packages.
-
-14-03-2015
-Version 1.0.2
-
-[Feature] - Added gtk status icon with popup menu.
-
-11-03-2015
-Version 1.0.1
-
-[Updated] - Update options.
-
-[Feature] - Added check software updates.
-		  - Added display upgraded or rebuilt packages.
-
-04-03-2015
-Version 1.0.0
-
-[Features] - Released version 1.0.0
+1.0.0 - 04/03/2015
+Added:
+- Released version 1.0.0
