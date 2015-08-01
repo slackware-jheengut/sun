@@ -51,15 +51,13 @@ setup(
     url="https://github.com/dslackw/sun",
     package_data={"": ["LICENSE", "README.rst", "ChangeLog.txt"]},
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Classifier: Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: GNU General Public License v3 or later "
         "(GPLv3+)",
-        "Classifier: Operating System :: Unix",
-        "Classifier: Programming Language :: Python",
-        "Classifier: Programming Language :: Python :: 2.5",
-        "Classifier: Programming Language :: Python :: 2.6",
+        "Classifier: Operating System :: POSIX :: Linux",
         "Classifier: Programming Language :: Python :: 2.7",
+        "Classifier: Topic :: Desktop Environment",
+        "Classifier: Topic :: System :: Monitoring"
         ],
     long_description=open("README.rst").read()
 )
