@@ -38,6 +38,12 @@ from sun.__metadata__ import (
     bin_path, rc_path, desktop_path
 )
 
+INSTALLATION_REQUIREMENTS = ["pynotify"]
+DOCS_REQUIREMENTS = []
+TESTS_REQUIREMENTS = []
+OPTIONAL_REQUIREMENTS = []
+
+
 setup(
     name=__all__,
     packages=["sun", "sun/gtk", "sun/cli"],
@@ -50,6 +56,12 @@ setup(
     author_email=__email__,
     url="https://github.com/dslackw/sun",
     package_data={"": ["LICENSE", "README.rst", "ChangeLog.txt"]},
+    install_requires=INSTALLATION_REQUIREMENTS,
+    extras_require={
+        "optional": OPTIONAL_REQUIREMENTS,
+        "docs": DOCS_REQUIREMENTS,
+        "tests": TESTS_REQUIREMENTS,
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: GNU General Public License v3 or later "
