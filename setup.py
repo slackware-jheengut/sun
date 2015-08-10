@@ -38,7 +38,7 @@ from sun.__metadata__ import (
     bin_path, rc_path, desktop_path
 )
 
-INSTALLATION_REQUIREMENTS = ["pynotify"]
+INSTALLATION_REQUIREMENTS = []
 DOCS_REQUIREMENTS = []
 TESTS_REQUIREMENTS = []
 OPTIONAL_REQUIREMENTS = []
