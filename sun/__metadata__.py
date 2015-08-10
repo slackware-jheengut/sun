@@ -28,7 +28,7 @@ import os
 __all__ = "sun"
 __author__ = "dslackw"
 __copyright__ = 2015
-__version_info__ = (1, 1, 1)
+__version_info__ = (1, 1, 2)
 __version__ = "{0}.{1}.{2}".format(*__version_info__)
 __license__ = "GNU General Public License v3 (GPLv3)"
 __email__ = "d.zlatanidis@gmail.com"
@@ -44,4 +44,6 @@ desktop_path = "/usr/share/applications/"
 conf_path = "/etc/{0}/".format(__all__)
 etc_slackpkg = "/etc/{0}/".format(updater)
 var_lib_slackpkg = "/var/lib/{0}/".format(updater)
-arch = "64" if os.uname()[4] == "x86_64" else ""
+machine = os.uname()[4]
+arch = ("64" if machine == "x86_64" else
+        "arm" if machine.startswith("arm") else "")

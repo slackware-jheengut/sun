@@ -92,7 +92,14 @@ def mirror():
                                                             "mirrors")))
     slackware_mirror = read_config(read_file("{0}{1}".format(conf_path,
                                                              "mirrors")))
-    if slackpkg_mirror and "current" in slackpkg_mirror:
+    if (slackpkg_mirror and arch.startswith("arm") and
+            "-current" in slackpkg_mirror):
+        return "{0}slackware{1}-current/{2}".format(slackware_mirror, arch,
+                                                    changelog_txt)
+    elif slackpkg_mirror and arch.startswith("arm"):
+        return "{0}slackware{1}-{2}/{3}".format(slackware_mirror, arch,
+                                                slack_ver()[1], changelog_txt)
+    elif slackpkg_mirror and "-current" in slackpkg_mirror:
         return "{0}slackware{1}-current/{2}".format(slackware_mirror, arch,
                                                     changelog_txt)
     else:

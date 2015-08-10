@@ -1,3 +1,7 @@
+1.1.2 - 11/08/2015
+Added:
+- Support Slackware ARM
+
 1.1.1 - 01/08/2015
 Fixed:
 - Support old Slackware versions
