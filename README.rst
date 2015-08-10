@@ -46,6 +46,10 @@ Installing
 
     $ pip install sun --upgrade
 
+Slackware ARM
+-------------
+Slackware ARM users needs to change mirror in /etc/sun/mirrors file.
+    
 Usage
 -----
 
