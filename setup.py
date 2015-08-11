@@ -43,7 +43,6 @@ DOCS_REQUIREMENTS = []
 TESTS_REQUIREMENTS = []
 OPTIONAL_REQUIREMENTS = []
 
-
 setup(
     name=__all__,
     packages=["sun", "sun/gtk", "sun/cli"],

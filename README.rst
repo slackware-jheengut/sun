@@ -38,8 +38,8 @@ Installing
 
 .. code-block:: bash
 
-    $ tar xvf sun-1.1.2.tar.gz
-    $ cd sun-1.1.2
+    $ tar xvf sun-1.1.3.tar.gz
+    $ cd sun-1.1.3
     $ ./install.sh
 
     or
@@ -72,7 +72,7 @@ CLI
 .. code-block:: bash
 
     $ sun help
-    SUN (Slackware Update Notifier) - Version: 1.1.2
+    SUN (Slackware Update Notifier) - Version: 1.1.3
 
     Usage: sun [OPTION]
 
