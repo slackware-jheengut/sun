@@ -66,6 +66,7 @@ As for xfce:
 Settings Manager --> Session and Startup --> Application Autostart --> +Add
 
 .. code-block:: bash
+    
     [Add application]
 
     Name: sun
