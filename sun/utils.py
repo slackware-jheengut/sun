@@ -139,10 +139,14 @@ def config():
 def os_info():
     """Get OS info
     """
+    stype = ""
     slack, ver = slack_ver()
-    stype = "Stable"
-    if "current" in mirror():
-        stype = "Current"
+    mir = mirror()
+    if mir:
+        if "current" in mir:
+            stype = "Current"
+        else:
+            stype = "Stable"
     info = (
         "User: {0}\n"
         "OS: {1}\n"
