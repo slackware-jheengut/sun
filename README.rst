@@ -54,13 +54,16 @@ Installing
 Usage
 -----
 
-First choose ONE mirror from '/etc/slackpkg/mirrors' file.
+Make sure that daemon has executable permission or otherwise 
+run '# chmod +x /etc/rc.d/rc.sun'.
+
+Then choose ONE mirror from '/etc/slackpkg/mirrors' file.
 
 
 Gtk menu icon
 -------------
 
-Then add sun in your windows manager session startup.
+Add sun in your windows manager session startup.
 
 As for xfce:
 Settings Manager --> Session and Startup --> Application Autostart --> +Add
