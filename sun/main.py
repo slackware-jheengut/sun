@@ -76,6 +76,8 @@ def main():
             urllib2.urlopen(mirror())
         except urllib2.URLError:
             connection = False
+        except ValueError:
+            pass
         if connection:
             Notify().show()
             time.sleep(60 * int(config()["INTERVAL"]))

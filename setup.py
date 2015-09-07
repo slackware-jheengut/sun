@@ -80,8 +80,6 @@ if "install" in sys.argv:
             os.makedirs(d)
     print("Install sun.conf --> {0}".format(conf_path))
     shutil.copy2("conf/{0}.conf".format(__all__), conf_path)
-    print("Install mirrors --> {0}".format(conf_path))
-    shutil.copy2("conf/mirrors", conf_path)
     print("Install rc.sun --> {0}".format(rc_path))
     shutil.copy2("conf/rc.{0}".format(__all__), rc_path)
     os.chmod(rc_path + "rc.sun", 0755)

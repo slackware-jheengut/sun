@@ -1,3 +1,9 @@
+1.1.4 - 07/09/2015
+Updated:
+- ChangeLog.txt url
+Removed:
+- sun mirrors file
+
 1.1.3 - 11/8/2015
 Fixed:
 - setup.py install requirements

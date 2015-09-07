@@ -44,5 +44,5 @@ for file in $ARCHIVES; do
     fi
 done 
 
-# install or upgrade with new version
+# install or upgrade with new version as Slackware package
 upgradepkg --install-new /tmp/$PRGNAM-$VERSION-*$TAG.t?z

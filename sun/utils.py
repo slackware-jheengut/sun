@@ -27,7 +27,6 @@ import re
 import getpass
 import urllib2
 from __metadata__ import (
-    arch,
     pkg_path,
     conf_path,
     etc_slackpkg,
@@ -43,6 +42,8 @@ def urlopen(link):
         return urllib2.urlopen(link)
     except urllib2.URLError:
         pass
+    except ValueError:
+        return ""
 
 
 def read_file(registry):
@@ -83,35 +84,29 @@ def read_config(config):
         line = line.lstrip()
         if line and not line.startswith("#"):
             return line
+    return ""
 
 
 def mirror():
-    """Grab Slackware ChangeLog.txt mirror
+    """Get mirror from slackpkg mirrors file
     """
-    slackpkg_mirror = read_config(read_file("{0}{1}".format(etc_slackpkg,
-                                                            "mirrors")))
-    slackware_mirror = read_config(read_file("{0}{1}".format(conf_path,
-                                                             "mirrors")))
-    if (slackpkg_mirror and arch.startswith("arm") and
-            "-current" in slackpkg_mirror):
-        return "{0}slackware{1}-current/{2}".format(slackware_mirror, arch,
-                                                    changelog_txt)
-    elif slackpkg_mirror and arch.startswith("arm"):
-        return "{0}slackware{1}-{2}/{3}".format(slackware_mirror, arch,
-                                                slack_ver()[1], changelog_txt)
-    elif slackpkg_mirror and "-current" in slackpkg_mirror:
-        return "{0}slackware{1}-current/{2}".format(slackware_mirror, arch,
-                                                    changelog_txt)
+    slack_mirror = read_config(
+        read_file("{0}{1}".format(etc_slackpkg, "mirrors")))
+    if slack_mirror:
+        return slack_mirror + changelog_txt
     else:
-        return "{0}slackware{1}-{2}/{3}".format(slackware_mirror, arch,
-                                                slack_ver()[1], changelog_txt)
+        print("\nYou do not have any mirror selected in /etc/slackpkg/mirrors"
+              "\nPlease edit that file and uncomment ONE mirror.\n")
+        return ""
 
 
 def fetch():
     """Get ChangeLog.txt file size and count upgraded packages
     """
-    tar = urlopen(mirror())
-    r = tar.read()
+    mir, r = mirror(), ""
+    if mir:
+        tar = urlopen(mir)
+        r = tar.read()
     count = 0
     slackpkg_last_date = read_file("{0}{1}".format(
         var_lib_slackpkg, changelog_txt)).split("\n", 1)[0].strip()

@@ -38,33 +38,46 @@ Installing
 
 .. code-block:: bash
 
-    $ tar xvf sun-1.1.3.tar.gz
-    $ cd sun-1.1.3
+    Required root privileges
+
+    $ tar xvf sun-1.1.4.tar.gz
+    $ cd sun-1.1.4
     $ ./install.sh
+
+    Installed as Slackware package
 
     or
 
     $ pip install sun --upgrade
 
-Slackware ARM
--------------
-Slackware ARM users needs to change mirror in /etc/sun/mirrors file.
-    
+
 Usage
 -----
 
-Add sun in your windows manager session startup.
+First choose ONE mirror from '/etc/slackpkg/mirrors' file.
+
+
+Gtk menu icon
+-------------
+
+Then add sun in your windows manager session startup.
 
 As for xfce:
 Settings Manager --> Session and Startup --> Application Autostart --> +Add
 
 .. code-block:: bash
+    [Add application]
 
     Name: sun
     Description: Slackware Update Notifier
     Command: /usr/bin/sun start --gtk
-    [Ok]
+    
+    Click [Ok]
 
+    Click Menu --> System --> SUN (Slackware Update Notifier)
+    An icon will appear in the panel, right click in SUN icon to show menu.
+
+    Thats it.
     
 CLI
 ---
@@ -72,7 +85,7 @@ CLI
 .. code-block:: bash
 
     $ sun help
-    SUN (Slackware Update Notifier) - Version: 1.1.3
+    SUN (Slackware Update Notifier) - Version: 1.1.4
 
     Usage: sun [OPTION]
 
@@ -109,9 +122,6 @@ Configuration files
 
     /etc/sun/sun.conf
         General configuration of sun
-
-    /etc/sun/mirrors
-        List of Slackware ChangeLog.txt Mirrors
 
     /etc/rc.d/rc.sun
         Runtime configuration file
