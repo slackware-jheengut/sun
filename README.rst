@@ -30,9 +30,12 @@ package updates in Slackware and CLI tool for monitoring upgraded packages.
 
 How works
 ---------
+
 Actually read the two dates of ChangeLog.txt files one the server and a local by counting
 how many packages have been upgraded, rebuilt or added.
+SUN works with slackpkg as well slpkg.
  
+
 Installing
 ----------
 
