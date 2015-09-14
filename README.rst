@@ -22,7 +22,7 @@
 About
 -----
 
-SUN (Slackware Update Notifier) is a tray notification applet for informing about
+SUN :sunny: (Slackware Update Notifier) is a tray notification applet for informing about
 package updates in Slackware and CLI tool for monitoring upgraded packages.
 
 .. image:: https://raw.githubusercontent.com/dslackw/images/master/sun/sun.png
@@ -33,7 +33,7 @@ How works
 
 Actually read the two dates of ChangeLog.txt files one the server and a local by counting
 how many packages have been upgraded, rebuilt or added.
-:sunny: SUN works with slackpkg as well with slpkg.
+SUN :sunny: works with slackpkg as well with slpkg.
  
 
 Installing
