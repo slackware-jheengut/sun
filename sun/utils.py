@@ -122,7 +122,7 @@ def fetch():
 
 
 def config():
-    """Reaturn sun configuration values
+    """Return sun configuration values
     """
     conf_args = {
         "INTERVAL": 60,

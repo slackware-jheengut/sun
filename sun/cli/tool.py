@@ -55,7 +55,7 @@ def usage():
         "  restart  restart sun daemon",
         "  check    check for software updates",
         "  status   sun daemon status",
-        "  info     os information"
+        "  info     Os information"
     ]
     for opt in args:
         print("{0}".format(opt))
