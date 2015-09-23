@@ -44,6 +44,9 @@ def urlopen(link):
         pass
     except ValueError:
         return ""
+    except KeyboardInterrupt:
+        print("")
+        raise SystemExit()
 
 
 def read_file(registry):
@@ -106,7 +109,10 @@ def fetch():
     mir, r = mirror(), ""
     if mir:
         tar = urlopen(mir)
-        r = tar.read()
+        try:
+            r = tar.read()
+        except AttributeError:
+            print("sun: error: can't read mirror")
     count = 0
     slackpkg_last_date = read_file("{0}{1}".format(
         var_lib_slackpkg, changelog_txt)).split("\n", 1)[0].strip()
