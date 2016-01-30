@@ -73,6 +73,7 @@ setup(
     long_description=open("README.rst").read()
 )
 
+# Install configs, .desktop and icon via pip
 if "install" in sys.argv:
     dirs = [bin_path, conf_path, icon_path, rc_path]
     for d in dirs:
