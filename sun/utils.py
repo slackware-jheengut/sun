@@ -3,7 +3,7 @@
 
 # utils.py is a part of sun.
 
-# Copyright 2015 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2016 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about

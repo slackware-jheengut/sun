@@ -3,7 +3,7 @@
 
 # __metadata__.py is a part of sun.
 
-# Copyright 2015 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2016 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about
@@ -27,7 +27,7 @@ import os
 
 __all__ = "sun"
 __author__ = "dslackw"
-__copyright__ = 2015
+__copyright__ = 2015-2016
 __version_info__ = (1, 1, 4)
 __version__ = "{0}.{1}.{2}".format(*__version_info__)
 __license__ = "GNU General Public License v3 (GPLv3)"
