@@ -1,3 +1,10 @@
+1.1.5 - 30/01/2016
+Updated:
+- Copyright 2015-2016
+- Year int to string
+Fixed:
+- SUN status icon
+
 1.1.4 - 07/09/2015
 Updated:
 - ChangeLog.txt url
