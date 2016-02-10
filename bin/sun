@@ -32,4 +32,8 @@
 
 from sun.cli.tool import init
 
-init()
+try:
+    init()
+except KeyboardInterrupt:
+    print("")
+    raise SystemExit()
