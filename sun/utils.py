@@ -106,7 +106,7 @@ def mirror():
 def fetch():
     """Get ChangeLog.txt file size and count upgraded packages
     """
-    mir, r = mirror(), ""
+    mir, r, slackpkg_last_date = mirror(), "", ""
     if mir:
         tar = urlopen(mir)
         try:
@@ -114,8 +114,12 @@ def fetch():
         except AttributeError:
             print("sun: error: can't read mirror")
     count = 0
-    slackpkg_last_date = read_file("{0}{1}".format(
-        var_lib_slackpkg, changelog_txt)).split("\n", 1)[0].strip()
+    if os.path.isfile(var_lib_slackpkg + changelog_txt):
+        slackpkg_last_date = read_file("{0}{1}".format(
+            var_lib_slackpkg, changelog_txt)).split("\n", 1)[0].strip()
+    else:
+        print("sun: error: can't read ChangeLog.txt file")
+        raise SystemExit()
     upgraded = []
     for line in r.splitlines():
         if slackpkg_last_date == line.strip():
