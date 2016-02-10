@@ -1,3 +1,9 @@
+1.1.6 - 10/02/2016
+Added:
+- Keyboard interrupt on cli, daemon and gtk
+Fixed:
+- IOError: [Errno 2] No such file or directory: '/var/lib/slackpkg/ChangeLog.txt'
+
 1.1.5 - 30/01/2016
 Updated:
 - Copyright 2015-2016
