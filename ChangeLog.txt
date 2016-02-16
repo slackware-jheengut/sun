@@ -1,3 +1,7 @@
+1.1.7 - 16/02/2016
+Fixed:
+- Avoid terminate gtk status icon
+
 1.1.6 - 10/02/2016
 Added:
 - Keyboard interrupt on cli, daemon and gtk

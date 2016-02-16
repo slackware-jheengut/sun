@@ -46,8 +46,8 @@ Installing
 
     Required root privileges
 
-    $ tar xvf sun-1.1.6.tar.gz
-    $ cd sun-1.1.6
+    $ tar xvf sun-1.1.7.tar.gz
+    $ cd sun-1.1.7
     $ ./install.sh
 
     Installed as Slackware package
@@ -95,7 +95,7 @@ CLI
 .. code-block:: bash
 
     $ sun help
-    SUN (Slackware Update Notifier) - Version: 1.1.6
+    SUN (Slackware Update Notifier) - Version: 1.1.7
 
     Usage: sun [OPTION]
 
