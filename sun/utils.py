@@ -107,6 +107,7 @@ def fetch():
     """Get ChangeLog.txt file size and count upgraded packages
     """
     mir, r, slackpkg_last_date = mirror(), "", ""
+    count, upgraded = 0, []
     if mir:
         tar = urlopen(mir)
         try:
@@ -118,9 +119,7 @@ def fetch():
         slackpkg_last_date = read_file("{0}{1}".format(
             var_lib_slackpkg, changelog_txt)).split("\n", 1)[0].strip()
     else:
-        print("sun: error: can't read ChangeLog.txt file")
-        raise SystemExit()
-    upgraded = []
+        return [count, upgraded]
     for line in r.splitlines():
         if slackpkg_last_date == line.strip():
             break
