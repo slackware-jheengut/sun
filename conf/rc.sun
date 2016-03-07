@@ -13,7 +13,7 @@ sun_start() {
 
 # Stop sun:
 sun_stop() {
-  echo "Stoping SUN daemon:  /usr/bin/sun_daemon"
+  echo "Stopping SUN daemon:  /usr/bin/sun_daemon"
   if [ -r /var/run/sun_daemon.pid ]; then
     kill $(cat /var/run/sun_daemon.pid)
   else

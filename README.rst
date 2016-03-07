@@ -112,7 +112,7 @@ CLI
     Starting SUN daemon:  /usr/bin/sun_daemon
 
     $ sun stop
-    Stoping SUN daemon:  /usr/bin/sun_daemon
+    Stopping SUN daemon:  /usr/bin/sun_daemon
 
     $ sun status
     SUN is not running
