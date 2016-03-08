@@ -1,4 +1,4 @@
-1.2.0 - 07/03/2016
+1.2.0 - 08/03/2016
 Updated:
 - Management daemon without using rc.sun file. Thanks to Robby
 Workman for the contribution #6
