@@ -106,7 +106,7 @@ CLI
       info     os information
 
     $ sun start
-    Starting SUN daemon:  /usr/bin/sun_daemon
+    Starting SUN daemon:  /usr/bin/sun_daemon &
 
     $ sun stop
     Stopping SUN daemon:  /usr/bin/sun_daemon
