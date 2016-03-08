@@ -78,7 +78,7 @@ python setup.py install --root=$PKG
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/etc/$PRGNAM $PKG/usr/share/pixmaps
+mkdir -p $PKG/etc/$PRGNAM
 # install configurations files
 install -D -m0644 conf/${PRGNAM}.conf $PKG/etc/$PRGNAM/${PRGNAM}.conf.new
 
