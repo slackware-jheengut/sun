@@ -46,8 +46,8 @@ Installing
 
     Required root privileges
 
-    $ tar xvf sun-1.1.7.tar.gz
-    $ cd sun-1.1.7
+    $ tar xvf sun-1.2.0.tar.gz
+    $ cd sun-1.2.0
     $ ./install.sh
 
     Installed as Slackware package
@@ -60,10 +60,7 @@ Installing
 Usage
 -----
 
-Make sure that daemon has executable permission or otherwise 
-run '# chmod +x /etc/rc.d/rc.sun'.
-
-Then choose ONE mirror from '/etc/slackpkg/mirrors' file.
+Choose ONE mirror from '/etc/slackpkg/mirrors' file.
 
 
 Gtk menu icon
@@ -80,7 +77,7 @@ Settings Manager --> Session and Startup --> Application Autostart --> +Add
 
     Name: sun
     Description: Slackware Update Notifier
-    Command: /usr/bin/sun start --gtk
+    Command: /usr/bin/sun start_gtk &
     
     Click [Ok]
 
@@ -95,7 +92,7 @@ CLI
 .. code-block:: bash
 
     $ sun help
-    SUN (Slackware Update Notifier) - Version: 1.1.7
+    SUN (Slackware Update Notifier) - Version: 1.2.0
 
     Usage: sun [OPTION]
 
