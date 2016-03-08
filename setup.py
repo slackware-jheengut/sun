@@ -76,7 +76,7 @@ setup(
 
 # Install configs, .desktop and icon via pip
 if "install" in sys.argv:
-    dirs = [conf_path, icon_path]
+    dirs = [conf_path, icon_path, desktop_path]
     for d in dirs:
         if not os.path.exists(d):
             os.makedirs(d)
