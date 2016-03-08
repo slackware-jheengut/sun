@@ -34,6 +34,7 @@
 import time
 import urllib2
 import pynotify
+import commands
 from utils import (
     config,
     fetch,
@@ -60,11 +61,18 @@ class Notify(object):
         self.n = pynotify.Notification(self.summary, self.message, self.icon)
         self.n.set_timeout(60000 * int(config()["STANDBY"]))
 
-    def show(self):
-        """Startup dbus message if packages
+    def gtk_loaded(self):
+        """Check if gtk icon running
         """
-        if self.pkg_count > 0:
-            self.n.show()     # start daemon
+        out = commands.getoutput("ps -A")
+        if "sun_gtk" in out:
+            return True
+
+    def show(self):
+            """Startup dbus message if packages
+            """
+            if self.pkg_count > 0 and self.gtk_loaded():
+                self.n.show()     # start daemon
 
 
 def main():
