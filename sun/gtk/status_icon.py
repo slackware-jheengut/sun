@@ -36,6 +36,7 @@ from sun.__metadata__ import (
     __author__,
     __version__,
     __website__,
+    bin_path,
     icon_path
 )
 from sun.cli.tool import (
@@ -58,7 +59,7 @@ class GtkStatusIcon(object):
         self.img = gtk.Image()
         self.img.set_from_file(self.sun_icon)
         self.icon.set_tooltip("Slackware Update Notifier")
-        self.cmd = "/etc/rc.d/rc.sun"
+        self.cmd = "{0}sun_daemon".format(bin_path)
         gtk.main()
 
     def sub_menu(self):
@@ -215,19 +216,20 @@ class GtkStatusIcon(object):
 
     def _start(self, data):
         self.dialog_title = "Daemon"
-        subprocess.call("{0} {1}".format(self.cmd, "start"), shell=True)
+        subprocess.call("{0} &".format(self.cmd), shell=True)
         self.daemon_STOCK = gtk.STOCK_YES
         self.message(data)
 
     def _stop(self, data):
         self.dialog_title = "Daemon"
-        subprocess.call("{0} {1}".format(self.cmd, "stop"), shell=True)
+        subprocess.call("killall sun_daemon", shell=True)
         self.daemon_STOCK = gtk.STOCK_MEDIA_RECORD
         self.message(data)
 
     def _restart(self, data):
         self.dialog_title = "Daemon"
-        subprocess.call("{0} {1}".format(self.cmd, "restart"), shell=True)
+        subprocess.call("killall sun_daemon", shell=True)
+        subprocess.call("{0} &".format(self.cmd), shell=True)
         self.daemon_STOCK = gtk.STOCK_YES
         self.message(data)
 
@@ -236,7 +238,7 @@ class GtkStatusIcon(object):
         self.message(data + " " * 3)
 
     def _Quit(self, data):
-        subprocess.call("{0} {1}".format(self.cmd, data), shell=True)
+        # subprocess.call("{0} {1}".format(self.cmd, data), shell=True)
         gtk.main_quit()
 
 

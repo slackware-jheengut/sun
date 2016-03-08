@@ -23,7 +23,6 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import sys
-import time
 import getpass
 import commands
 import subprocess
@@ -31,15 +30,18 @@ from sun.utils import (
     fetch,
     os_info
 )
-from sun.__metadata__ import __version__
+from sun.__metadata__ import (
+    __version__,
+    bin_path,
+)
 
 
 def su():
     """Display message when sun execute as root
     """
     if getpass.getuser() == "root":
-        print("sun: Message: running as root ...")
-        time.sleep(2)
+        print("sun: Error: It should not be run as root")
+        raise SystemExit()
 
 
 def usage():
@@ -87,14 +89,19 @@ def init():
     su()
     args = sys.argv
     args.pop(0)
-    cmd = "/etc/rc.d/rc.sun"
+    cmd = "{0}sun_daemon".format(bin_path)
     if len(args) == 1:
         if args[0] == "start":
-            subprocess.call("{0} {1}".format(cmd, "start"), shell=True)
+            print("Starting SUN daemon:  {0} &".format(cmd))
+            subprocess.call("{0} &".format(cmd), shell=True)
         elif args[0] == "stop":
-            subprocess.call("{0} {1}".format(cmd, "stop"), shell=True)
+            print("Stopping SUN daemon:  {0}".format(cmd))
+            subprocess.call("killall sun_daemon", shell=True)
         elif args[0] == "restart":
-            subprocess.call("{0} {1}".format(cmd, "restart"), shell=True)
+            print("Stopping SUN daemon:  {0}".format(cmd))
+            subprocess.call("killall sun_daemon", shell=True)
+            print("Starting SUN daemon:  {0} &".format(cmd))
+            subprocess.call("{0} &".format(cmd), shell=True)
         elif args[0] == "check":
             message, count, packages = check_updates()
             if count > 0:

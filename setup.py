@@ -35,13 +35,14 @@ from sun.__metadata__ import (
     __all__, __version__,
     __email__, __author__,
     conf_path, icon_path,
-    bin_path, rc_path, desktop_path
+    desktop_path
 )
 
 INSTALLATION_REQUIREMENTS = []
 DOCS_REQUIREMENTS = []
 TESTS_REQUIREMENTS = []
 OPTIONAL_REQUIREMENTS = []
+
 
 setup(
     name=__all__,
@@ -75,15 +76,12 @@ setup(
 
 # Install configs, .desktop and icon via pip
 if "install" in sys.argv:
-    dirs = [bin_path, conf_path, icon_path, rc_path]
+    dirs = [conf_path, icon_path]
     for d in dirs:
         if not os.path.exists(d):
             os.makedirs(d)
     print("Install sun.conf --> {0}".format(conf_path))
     shutil.copy2("conf/{0}.conf".format(__all__), conf_path)
-    print("Install rc.sun --> {0}".format(rc_path))
-    shutil.copy2("conf/rc.{0}".format(__all__), rc_path)
-    os.chmod(rc_path + "rc.sun", 0755)
     print("Install sun.png --> {0}".format(icon_path))
     shutil.copy2("icon/{0}.png".format(__all__), icon_path)
     print("Install sun.desktop --> {0}".format(desktop_path))

@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=sun
-VERSION=${VERSION:-1.1.7}
+VERSION=${VERSION:-1.2.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_dsw}
 
@@ -78,12 +78,9 @@ python setup.py install --root=$PKG
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/etc/$PRGNAM $PKG/etc/rc.d/ $PKG/usr/share/pixmaps
+mkdir -p $PKG/etc/$PRGNAM $PKG/usr/share/pixmaps
 # install configurations files
 install -D -m0644 conf/${PRGNAM}.conf $PKG/etc/$PRGNAM/${PRGNAM}.conf.new
-
-# install rc file
-install -D -m0755 conf/rc.${PRGNAM} $PKG/etc/rc.d/rc.${PRGNAM}
 
 # install notify icon and .desktop file
 mkdir -p $PKG/usr/share/pixmaps $PKG/usr/share/applications
