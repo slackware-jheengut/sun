@@ -1,20 +1,21 @@
 #!/bin/sh
 # Start/stop/restart Slackware Update Notifier.
 
-PIDFILE=$HOME/.cache/sun/daemon.pid
+PIDFILE="$HOME/.cache/sun/daemon.pid"
+DAEMON="/usr/bin/sun_daemon"
 
 # Start sun:
 sun_start() {
   if [ -x /usr/bin/sun_daemon ]; then
-    echo "Starting SUN daemon:  /usr/bin/sun_daemon"
+    echo "Starting SUN daemon:  $DAEMON &"
     mkdir -p $(dirname $PIDFILE)
-    /usr/bin/sun_daemon --pidfile $PIDFILE &
+    $DAEMON --pidfile $PIDFILE &
   fi
 }
 
 # Stop sun:
 sun_stop() {
-  echo "Stopping SUN daemon:  /usr/bin/sun_daemon"
+  echo "Stopping SUN daemon: $DAEMON"
   if [ -r /var/run/sun_daemon.pid ]; then
     kill $(cat $PIDFILE)
   else
@@ -33,10 +34,10 @@ sun_restart() {
 # Start sun paraller with gtk status icon
 sun_gtk() {
   if [ -x /usr/bin/sun_daemon ]; then
-    echo "Starting SUN daemon:  /usr/bin/sun_daemon"
+    echo "Starting SUN daemon:  $DAEMON &"
     mkdir -p $(dirname $PIDFILE)
-    /usr/bin/sun_daemon --pidfile $PIDFILE &
-    echo "Starting gtk status icon: /usr/bin/sun_gtk"
+    $DAEMON --pidfile $PIDFILE &
+    echo "Starting gtk status icon: /usr/bin/sun_gtk &"
     /usr/bin/sun_gtk &
   fi
 }
