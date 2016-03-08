@@ -238,7 +238,7 @@ class GtkStatusIcon(object):
         self.message(data + " " * 3)
 
     def _Quit(self, data):
-        # subprocess.call("{0} {1}".format(self.cmd, data), shell=True)
+        del data
         gtk.main_quit()
 
 
