@@ -77,7 +77,7 @@ Settings Manager --> Session and Startup --> Application Autostart --> +Add
 
     Name: sun
     Description: Slackware Update Notifier
-    Command: /usr/bin/sun start_gtk &
+    Command: /usr/bin/sun_gtk &
     
     Click [Ok]
 
