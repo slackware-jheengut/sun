@@ -83,6 +83,18 @@ def daemon_status():
     return message
 
 
+def _init_check_upodates():
+    """Sub function for init
+    """
+    message, count, packages = check_updates()
+    if count > 0:
+        print(message)
+        for pkg in packages:
+            print("{0}".format(pkg))
+    else:
+        print(message)
+
+
 def init():
     """Initialization , all begin from here
     """
@@ -103,13 +115,7 @@ def init():
             print("Starting SUN daemon:  {0} &".format(cmd))
             subprocess.call("{0} &".format(cmd), shell=True)
         elif args[0] == "check":
-            message, count, packages = check_updates()
-            if count > 0:
-                print(message)
-                for pkg in packages:
-                    print("{0}".format(pkg))
-            else:
-                print(message)
+            _init_check_upodates()
         elif args[0] == "status":
             print(daemon_status())
         elif args[0] == "help":
