@@ -69,10 +69,10 @@ class Notify(object):
             return True
 
     def show(self):
-            """Startup dbus message if packages
-            """
-            if self.pkg_count > 0 and self.gtk_loaded():
-                self.n.show()     # start daemon
+        """Startup dbus message if packages
+        """
+        if self.pkg_count > 0 and self.gtk_loaded():
+            self.n.show()     # start daemon
 
 
 def main():
