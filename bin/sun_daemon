@@ -30,7 +30,7 @@
 |____/ \___/|_| \_|
 """
 
-from sun.main import main
+from sun.daemon import main
 
 if __name__ == "__main__":
     try:
