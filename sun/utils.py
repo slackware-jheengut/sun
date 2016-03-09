@@ -114,7 +114,6 @@ def fetch():
             r = tar.read()
         except AttributeError:
             print("sun: error: can't read mirror")
-    count = 0
     if os.path.isfile(var_lib_slackpkg + changelog_txt):
         slackpkg_last_date = read_file("{0}{1}".format(
             var_lib_slackpkg, changelog_txt)).split("\n", 1)[0].strip()
