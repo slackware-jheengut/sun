@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# main.py is a part of sun.
+# daemon.py is a part of sun.
 
 # Copyright 2015-2016 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
