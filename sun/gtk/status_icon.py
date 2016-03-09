@@ -60,7 +60,14 @@ class GtkStatusIcon(object):
         self.img.set_from_file(self.sun_icon)
         self.icon.set_tooltip("Slackware Update Notifier")
         self.cmd = "{0}sun_daemon".format(bin_path)
+        self.daemon_start()
         gtk.main()
+
+    def daemon_start(self):
+        """Start daemon when gtk loaded
+        """
+        if daemon_status() == "SUN not running":
+            subprocess.call("{0} &".format(self.cmd), shell=True)
 
     def sub_menu(self):
         """Create daemon submenu
