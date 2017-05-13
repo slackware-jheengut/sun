@@ -130,9 +130,6 @@ Configuration files
     /etc/sun/sun.conf
         General configuration of sun
 
-    /etc/rc.d/rc.sun
-        Runtime configuration file
-
     
 Screenshots
 -----------
