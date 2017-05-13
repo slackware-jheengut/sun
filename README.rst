@@ -165,6 +165,6 @@ If you feel satisfied with this project and want to thanks me make a donation.
 Copyright 
 ---------
 
-- Copyright © Dimitris Zlatanidis
+- Copyright 2015-2017 © Dimitris Zlatanidis
 - Slackware® is a Registered Trademark of Patrick Volkerding.
 - Linux is a Registered Trademark of Linus Torvalds.
