@@ -3,7 +3,7 @@
 
 # daemon.py is a part of sun.
 
-# Copyright 2015-2016 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2018 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about
@@ -33,7 +33,7 @@
 
 import time
 import urllib2
-import pynotify
+import notify2
 import commands
 from utils import (
     config,
@@ -50,15 +50,15 @@ class Notify(object):
     """Main notify Class
     """
     def __init__(self):
-        pynotify.uninit()
-        pynotify.init("sun")
+        notify2.uninit()
+        notify2.init("sun")
         self.pkg_count = fetch()[0]
         self.message_added = ""
         self.summary = "{0}Software Updates".format(" " * 14)
         self.message = ("{0}{1} Software updates are available\n".format(
             " " * 3, self.pkg_count))
         self.icon = "{0}{1}.png".format(icon_path, __all__)
-        self.n = pynotify.Notification(self.summary, self.message, self.icon)
+        self.n = notify2.Notification(self.summary, self.message, self.icon)
         self.n.set_timeout(60000 * int(config()["STANDBY"]))
 
     def gtk_loaded(self):
