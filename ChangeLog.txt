@@ -1,6 +1,8 @@
 1.2.2 - 03/03/2018
 Updated:
 - Switch to python-notify2
+Fixed:
+- Added directories and removed packages
 
 1.2.1 - 09/03/2016
 Fixed:
