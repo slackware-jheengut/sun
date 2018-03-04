@@ -66,10 +66,10 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: GNU General Public License v3 or later "
         "(GPLv3+)",
-        "Classifier: Operating System :: POSIX :: Linux",
-        "Classifier: Programming Language :: Python :: 2.7",
-        "Classifier: Topic :: Desktop Environment",
-        "Classifier: Topic :: System :: Monitoring"
+        "Operating System :: POSIX :: Linux",
+        "Programming Language :: Python :: 2.7",
+        "Topic :: Desktop Environment",
+        "Topic :: System :: Monitoring"
         ],
     long_description=open("README.rst").read()
 )
