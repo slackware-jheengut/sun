@@ -1,20 +1,3 @@
-.. image:: https://img.shields.io/github/release/dslackw/sun.svg
-    :target: https://github.com/dslackw/sun/releases
-.. image:: https://travis-ci.org/dslackw/sun.svg?branch=master
-    :target: https://travis-ci.org/dslackw/sun
-.. image:: https://landscape.io/github/dslackw/sun/master/landscape.png
-    :target: https://landscape.io/github/dslackw/sun/master
-.. image:: https://img.shields.io/codacy/ea3c2619e1124874a7d53079092dc956.svg
-    :target: https://www.codacy.com/public/dzlatanidis/sun/dashboard
-.. image:: https://img.shields.io/badge/license-GPLv3-blue.svg
-    :target: https://github.com/dslackw/sun
-.. image:: https://img.shields.io/github/stars/dslackw/sun.svg
-    :target: https://github.com/dslackw/sun
-.. image:: https://img.shields.io/github/forks/dslackw/sun.svg
-    :target: https://github.com/dslackw/sun
-.. image:: https://img.shields.io/github/issues/dslackw/sun.svg
-    :target: https://github.com/dslackw/sun/issues
-
 .. contents:: Table of Contents:
 
 About
