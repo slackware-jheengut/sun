@@ -136,8 +136,8 @@ Donate
 
 If you feel satisfied with this project and want to thanks me make a donation.
 
-.. image:: https://github.com/dslackw/images/blob/master/donate/paypaldonate.png
-    :target: https://www.paypal.me/dslackw
+.. image:: https://gitlab.com/dslackw/images/raw/master/donate/paypaldonate.png
+   :target: https://www.paypal.me/dslackw
 
 
 Copyright 
