@@ -9,7 +9,7 @@
 # sun is a tray notification applet for informing about
 # package updates in Slackware.
 
-# https://github.com/dslackw/sun
+# https://gitlab.com/dslackw/sun
 
 # sun is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published by

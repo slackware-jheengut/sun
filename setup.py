@@ -9,7 +9,7 @@
 # sun is a tray notification applet for informing about
 # package updates in Slackware.
 
-# https://github.com/dslackw/sun
+# https://gitlab.com/dslackw/sun
 
 # sun is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published by
@@ -54,8 +54,7 @@ setup(
     keywords=["tray", "notify", "slackware", "desktop"],
     author=__author__,
     author_email=__email__,
-    url="https://github.com/dslackw/sun",
-    package_data={"": ["LICENSE", "README.rst", "ChangeLog.txt"]},
+    url="https://gitlab.com/dslackw/sun",
     install_requires=INSTALLATION_REQUIREMENTS,
     extras_require={
         "optional": OPTIONAL_REQUIREMENTS,
@@ -80,9 +79,6 @@ if "install" in sys.argv:
     for d in dirs:
         if not os.path.exists(d):
             os.makedirs(d)
-    print("Install sun.conf --> {0}".format(conf_path))
     shutil.copy2("conf/{0}.conf".format(__all__), conf_path)
-    print("Install sun.png --> {0}".format(icon_path))
     shutil.copy2("icon/{0}.png".format(__all__), icon_path)
-    print("Install sun.desktop --> {0}".format(desktop_path))
     shutil.copy2("{0}.desktop".format(__all__), desktop_path)
