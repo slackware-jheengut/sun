@@ -17,7 +17,7 @@ How works
 
 Actually read the two dates of ChangeLog.txt files one the server and a local by counting
 how many packages have been upgraded, rebuilt or added.
-SUN works with `slackpkg <http://www.slackpkg.org/>`_ as well with `slpkg <https://gitlab.com/dslackw/slpkg>`_
+SUN works with `slackpkg <http://www.slackpkg.org/>`_ as well with `slpkg <https://dslackw.gitlab.io/slpkg>`_
  
 
 Installing
