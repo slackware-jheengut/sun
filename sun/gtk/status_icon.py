@@ -45,9 +45,9 @@ class GtkStatusIcon(object):
 
     def __init__(self):
         self.sun_icon = f'{icon_path}{__all__}.png'
-        self.statusicon = Gtk.StatusIcon()
-        self.statusicon.set_from_file(self.sun_icon)
-        self.statusicon.connect('popup-menu', self.right_click_event)
+        self.status_icon = Gtk.StatusIcon()
+        self.status_icon.set_from_file(self.sun_icon)
+        self.status_icon.connect('popup-menu', self.right_click_event)
         self.cmd = "{0}sun_daemon".format(bin_path)
         self.init_daemon()
 
@@ -109,7 +109,7 @@ class GtkStatusIcon(object):
 
         self.menu.show_all()
 
-        self.menu.popup(None, None, None, self.statusicon, button, time)
+        self.menu.popup(None, None, None, self.status_icon, button, time)
 
     def message(self, data, title):
         '''Method to display messages to the user'''
@@ -146,8 +146,8 @@ class GtkStatusIcon(object):
         about_dialog.set_name('SUN - About')
         about_dialog.set_program_name('SUN - Slackware Update Notifier')
         about_dialog.set_version(__version__)
-        about_dialog.set_authors([f"{__author__} <{__email__}>"])
-        about_dialog.set_license("\n".join(lic))
+        about_dialog.set_authors([f'{__author__} <{__email__}>'])
+        about_dialog.set_license('\n'.join(lic))
         about_dialog.set_website(__website__)
         about_dialog.set_logo(Pixbuf.new_from_file(self.sun_icon))
         about_dialog.set_comments(abt)

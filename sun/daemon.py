@@ -32,7 +32,7 @@
 '''
 
 import time
-import urllib
+import urllib3
 import notify2
 import subprocess
 from sun.utils import config, fetch, mirror
@@ -72,11 +72,13 @@ def main():
         connection = True
         time.sleep(1)
         try:
-            urllib.request.urlopen(mirror())
-        except urllib.error.URLError:
+            http = urllib3.PoolManager()
+            http.request('GET', mirror())
+        except urllib3.exceptions.NewConnectionError as e:
+            print(e)
             connection = False
-        except ValueError:
-            pass
+        except ValueError as e:
+            print(e)
         if connection:
             Notify().show()
             time.sleep(60 * int(config()['INTERVAL']))

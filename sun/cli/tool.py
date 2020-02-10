@@ -25,14 +25,8 @@
 import sys
 import getpass
 import subprocess
-from sun.utils import (
-    fetch,
-    os_info
-)
-from sun.__metadata__ import (
-    __version__,
-    bin_path,
-)
+from sun.utils import fetch, os_info
+from sun.__metadata__ import __version__, bin_path
 
 
 def su():

@@ -33,6 +33,7 @@ from sun.__metadata__ import (
 )
 
 INSTALLATION_REQUIREMENTS = [
+    'urllib3>=1.25.7'
     'dbus-python>=1.2.4',
     'notify2>=0.3.1',
     'pygobject>=3.18.2'

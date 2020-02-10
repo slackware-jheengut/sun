@@ -25,8 +25,7 @@
 import os
 import re
 import getpass
-import urllib
-from urllib.request import urlopen
+import urllib3
 from sun.__metadata__ import (
     pkg_path,
     conf_path,
@@ -39,8 +38,9 @@ from sun.__metadata__ import (
 def url_open(link):
     '''Return urllib urlopen'''
     try:
-        return urlopen(link)
-    except urllib.error.URLError as e:
+        http = urllib3.PoolManager()
+        return http.request('GET', link)
+    except urllib3.exceptions.NewConnectionError as e:
         print(e)
     except ValueError:
         return ''
@@ -69,8 +69,7 @@ def slack_ver():
 
 
 def ins_packages():
-    '''Count installed Slackware packages
-    '''
+    '''Count installed Slackware packages'''
     count = 0
     for pkg in os.listdir(pkg_path):
         if not pkg.startswith('.'):
@@ -154,12 +153,12 @@ def os_info():
         else:
             stype = 'Stable'
     info = (
-        'User: {0}\n'
-        'OS: {1}\n'
-        'Version: {2}\n'
-        'Type: {3}\n'
-        'Arch: {4}\n'
-        'Kernel: {5}\n'
-        'Packages: {6}'.format(getpass.getuser(), slack, ver, stype,
-                               os.uname()[4], os.uname()[2], ins_packages()))
+        f'User: {getpass.getuser()}\n'
+        f'OS: {slack}\n'
+        f'Version: {ver}\n'
+        f'Type: {stype}\n'
+        f'Arch: {os.uname()[4]}\n'
+        f'Kernel: {os.uname()[2]}\n'
+        f'Packages: {ins_packages()}'
+        )
     return info
