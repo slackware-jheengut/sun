@@ -118,6 +118,6 @@ def init():
         else:
             print("try: 'sun help'")
     elif len(args) == 2 and args[0] == 'start' and args[1] == '--gtk':
-        subprocess.call(f'{cmd} start--gtk', shell=True)
+        subprocess.call(f'sun_gtk &', shell=True)
     else:
         print("try: 'sun help'")
