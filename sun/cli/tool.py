@@ -3,7 +3,7 @@
 
 # sun is a part of sun.
 
-# Copyright 2015-2018 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2020 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about
@@ -118,6 +118,6 @@ def init():
         else:
             print("try: 'sun help'")
     elif len(args) == 2 and args[0] == 'start' and args[1] == '--gtk':
-        subprocess.call(f'sun_gtk &', shell=True)
+        subprocess.call('sun_gtk &', shell=True)
     else:
         print("try: 'sun help'")

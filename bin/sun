@@ -22,18 +22,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-"""
+'''
  ____  _   _ _   _
 / ___|| | | | \ | |
 \___ \| | | |  \| |
  ___) | |_| | |\  |
 |____/ \___/|_| \_|
-"""
+'''
 
 from sun.cli.tool import init
 
 try:
     init()
 except KeyboardInterrupt:
-    print("")
+    print('')
     raise SystemExit()

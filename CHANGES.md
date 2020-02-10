@@ -1,5 +1,5 @@
 SUN (Slackware Update Notifier)
-===
+===============================
 
 Version 1.3.0 - *(10/02/2020)*
 ### Updated
