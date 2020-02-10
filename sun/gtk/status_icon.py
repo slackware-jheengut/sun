@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # sun_gtk is a part of sun.
@@ -45,6 +45,7 @@ from sun.cli.tool import (
 from sun.utils import (
     os_info
 )
+
 
 
 class GtkStatusIcon(object):

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # licenses.py is a part of sun.
@@ -22,7 +22,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from __metadata__ import (
+from sun.__metadata__ import (
     __copyright__,
 )
 

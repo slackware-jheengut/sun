@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # daemon.py is a part of sun.
@@ -35,12 +35,12 @@ import time
 import urllib2
 import notify2
 import commands
-from utils import (
+from sun.utils import (
     config,
     fetch,
     mirror
 )
-from __metadata__ import (
+from sun.__metadata__ import (
     __all__,
     icon_path
 )

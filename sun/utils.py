@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # utils.py is a part of sun.
@@ -25,8 +25,9 @@
 import os
 import re
 import getpass
-import urllib2
-from __metadata__ import (
+import urllib
+from urllib.request import urlopen
+from sun.__metadata__ import (
     pkg_path,
     conf_path,
     etc_slackpkg,
@@ -35,13 +36,13 @@ from __metadata__ import (
 )
 
 
-def urlopen(link):
-    """Return urllib2 urlopen
+def url_open(link):
+    """Return urllib urlopen
     """
     try:
-        return urllib2.urlopen(link)
-    except urllib2.URLError:
-        pass
+        return urlopen(link)
+    except urllib.error.URLError as e:
+        print(e)
     except ValueError:
         return ""
     except KeyboardInterrupt:
@@ -52,7 +53,7 @@ def urlopen(link):
 def read_file(registry):
     """Return reading file
     """
-    with open(registry, "r") as file_txt:
+    with open(registry, "r", encoding='utf-8') as file_txt:
         read_file = file_txt.read()
         file_txt.close()
         return read_file
@@ -109,7 +110,7 @@ def fetch():
     mir, r, slackpkg_last_date = mirror(), "", ""
     count, upgraded = 0, []
     if mir:
-        tar = urlopen(mir)
+        tar = url_open(mir)
         try:
             r = tar.read()
         except AttributeError:
@@ -120,6 +121,7 @@ def fetch():
     else:
         return [count, upgraded]
     for line in r.splitlines():
+        line = line.decode('utf-8')
         if slackpkg_last_date == line.strip():
             break
         if (line.endswith("z:  Upgraded.") or line.endswith("z:  Rebuilt.") or

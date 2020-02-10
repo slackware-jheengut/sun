@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PRGNAM=sun
-VERSION=${VERSION:-1.2.3}
+VERSION=${VERSION:-1.3.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_dsw}
 
@@ -73,7 +73,7 @@ find -L . \
 # avoid install configuration files over setup.py
 sed -i 's/if "install"/if ""/' setup.py
 
-python setup.py install --root=$PKG
+python3 setup.py install --root=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
@@ -88,7 +88,7 @@ install -D -m0644 icon/${PRGNAM}.png $PKG/usr/share/pixmaps/${PRGNAM}.png
 install -D -m0644 ${PRGNAM}.desktop $PKG/usr/share/applications/${PRGNAM}.desktop
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a README.rst ChangeLog.txt LICENSE i3-WM $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a README.rst CHANGES.md LICENSE.txt i3-WM $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install

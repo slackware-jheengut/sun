@@ -24,7 +24,6 @@
 
 import sys
 import getpass
-import commands
 import subprocess
 from sun.utils import (
     fetch,
@@ -76,7 +75,7 @@ def check_updates():
 def daemon_status():
     """Display sun daemon status
     """
-    out = commands.getoutput("ps -A")
+    out =  subprocess.getoutput("ps -A")
     message = "SUN not running"
     if "sun_daemon" in out:
         message = "SUN is running..."
