@@ -66,12 +66,15 @@ setup(
     },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
-        'License :: OSI Approved :: GNU General Public License v3 or later '
-        '(GPLv3+)',
+        'License :: OSI Approved :: GNU General Public License v3 or later',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3.7',
         'Topic :: Desktop Environment',
-        'Topic :: System :: Monitoring'
+        'Topic :: System :: Monitoring',
+        'Topic :: System :: Software Distribution',
+        'Topic :: System :: Installation/Setup',
+        'Topic :: System :: Systems Administration',
+        'Topic :: System :: Software Distribution',
         ],
     python_requires='>=3.7'
 )
