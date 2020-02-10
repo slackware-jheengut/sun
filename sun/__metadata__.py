@@ -3,7 +3,7 @@
 
 # __metadata__.py is a part of sun.
 
-# Copyright 2015-2018 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2020 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about
@@ -22,27 +22,28 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+
 import os
 
 
-__all__ = "sun"
-__author__ = "dslackw"
-__copyright__ = "2015-2018"
+__all__ = 'sun'
+__author__ = 'dslackw'
+__copyright__ = '2015-2020'
 __version_info__ = (1, 3, 0)
-__version__ = "{0}.{1}.{2}".format(*__version_info__)
-__license__ = "GNU General Public License v3 (GPLv3)"
-__email__ = "d.zlatanidis@gmail.com"
-__website__ = "https://gitlab.com/dslackw/sun"
+__version__ = '{0}.{1}.{2}'.format(*__version_info__)
+__license__ = 'GNU General Public License v3 (GPLv3)'
+__email__ = 'd.zlatanidis@gmail.com'
+__website__ = 'https://gitlab.com/dslackw/sun'
 
-updater = "slackpkg"
-changelog_txt = "ChangeLog.txt"
-bin_path = "/usr/bin/"
-pkg_path = "/var/log/packages/"
-icon_path = "/usr/share/pixmaps/"
-desktop_path = "/usr/share/applications/"
-conf_path = "/etc/{0}/".format(__all__)
-etc_slackpkg = "/etc/{0}/".format(updater)
-var_lib_slackpkg = "/var/lib/{0}/".format(updater)
+updater = 'slackpkg'
+changelog_txt = 'ChangeLog.txt'
+bin_path = '/usr/bin/'
+pkg_path = '/var/log/packages/'
+icon_path = '/usr/share/pixmaps/'
+desktop_path = '/usr/share/applications/'
+conf_path = '/etc/{0}/'.format(__all__)
+etc_slackpkg = '/etc/{0}/'.format(updater)
+var_lib_slackpkg = '/var/lib/{0}/'.format(updater)
 machine = os.uname()[4]
-arch = ("64" if machine == "x86_64" else
-        "arm" if machine.startswith("arm") else "")
+arch = ('64' if machine == 'x86_64' else
+        'arm' if machine.startswith('arm') else '')

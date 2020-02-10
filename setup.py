@@ -3,7 +3,7 @@
 
 # setup.py file is part of sun.
 
-# Copyright 2015-2018 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2020 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about
@@ -22,14 +22,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import sys
-import shutil
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 from sun.__metadata__ import (
     __all__, __version__,
@@ -38,7 +32,11 @@ from sun.__metadata__ import (
     desktop_path
 )
 
-INSTALLATION_REQUIREMENTS = []
+INSTALLATION_REQUIREMENTS = [
+    'dbus-python>=1.2.4',
+    'notify2>=0.3.1',
+    'pygobject>=3.18.2'
+    ]
 DOCS_REQUIREMENTS = []
 TESTS_REQUIREMENTS = []
 OPTIONAL_REQUIREMENTS = []
@@ -46,39 +44,34 @@ OPTIONAL_REQUIREMENTS = []
 
 setup(
     name=__all__,
-    packages=["sun", "sun/gtk", "sun/cli"],
-    scripts=["bin/sun_daemon", "bin/sun", "bin/sun_gtk"],
+    packages=['sun', 'sun/gtk', 'sun/cli'],
+    scripts=['bin/sun_daemon', 'bin/sun', 'bin/sun_gtk'],
     version=__version__,
-    description="Tray notification applet for informing about package updates "
-                "in Slackware",
-    keywords=["tray", "notify", "slackware", "desktop"],
+    description='Tray notification applet for informing about package updates '
+                'in Slackware',
+    long_description=open('README.rst').read(),
+    keywords=['tray', 'notify', 'slackware', 'desktop'],
     author=__author__,
     author_email=__email__,
-    url="https://gitlab.com/dslackw/sun",
+    package_data={'': ['LICENSE.txt', 'README.rst', 'CHANGES.md']},
+    data_files=[('conf/sun.conf', [conf_path]),
+                ('icon/sun.png', [icon_path]),
+                ('sun.desktop', [desktop_path])],
+    url='https://gitlab.com/dslackw/sun',
     install_requires=INSTALLATION_REQUIREMENTS,
     extras_require={
-        "optional": OPTIONAL_REQUIREMENTS,
-        "docs": DOCS_REQUIREMENTS,
-        "tests": TESTS_REQUIREMENTS,
+        'optional': OPTIONAL_REQUIREMENTS,
+        'docs': DOCS_REQUIREMENTS,
+        'tests': TESTS_REQUIREMENTS,
     },
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "License :: OSI Approved :: GNU General Public License v3 or later "
-        "(GPLv3+)",
-        "Operating System :: POSIX :: Linux",
-        "Programming Language :: Python :: 3.7",
-        "Topic :: Desktop Environment",
-        "Topic :: System :: Monitoring"
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: GNU General Public License v3 or later '
+        '(GPLv3+)',
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python :: 3.7',
+        'Topic :: Desktop Environment',
+        'Topic :: System :: Monitoring'
         ],
-    long_description=open("README.rst").read()
+    python_requires='>=3.7'
 )
-
-# Install configs, .desktop and icon via pip
-if "install" in sys.argv:
-    dirs = [conf_path, icon_path, desktop_path]
-    for d in dirs:
-        if not os.path.exists(d):
-            os.makedirs(d)
-    shutil.copy2("conf/{0}.conf".format(__all__), conf_path)
-    shutil.copy2("icon/{0}.png".format(__all__), icon_path)
-    shutil.copy2("{0}.desktop".format(__all__), desktop_path)

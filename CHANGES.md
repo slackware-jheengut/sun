@@ -1,5 +1,10 @@
-SUN
+SUN (Slackware Update Notifier)
 ===
+
+Version 1.3.0 - *(10/02/2020)*
+### Updated
+- Migrate to Gtk 3.0
+- Updating code to Python 3
 
 Version 1.2.3 - *(07/07/2018)*
 ### Updated

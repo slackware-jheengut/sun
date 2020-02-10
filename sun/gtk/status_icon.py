@@ -3,7 +3,7 @@
 
 # sun_gtk is a part of sun.
 
-# Copyright 2015-2018 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2020 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about
@@ -136,15 +136,15 @@ class GtkStatusIcon(object):
 
     def show_os_info(self, data):
         '''Show message OS info'''
-        title = "SUN - OS Info"
+        title = 'SUN - OS Info'
         self.message(os_info(), title)
 
     def show_about_dialog(self, widget):
         '''Show message About info'''
         about_dialog = Gtk.AboutDialog()
         about_dialog.set_destroy_with_parent(True)
-        about_dialog.set_name("SUN - About")
-        about_dialog.set_program_name("SUN")
+        about_dialog.set_name('SUN - About')
+        about_dialog.set_program_name('SUN - Slackware Update Notifier')
         about_dialog.set_version(__version__)
         about_dialog.set_authors([f"{__author__} <{__email__}>"])
         about_dialog.set_license("\n".join(lic))
@@ -162,8 +162,8 @@ class GtkStatusIcon(object):
 
     def daemon_stop(self, data):
         '''Show message and stop the daemon'''
-        title = "Daemon"
-        subprocess.call("killall sun_daemon", shell=True)
+        title = 'Daemon'
+        subprocess.call('killall sun_daemon', shell=True)
         data = 'Daemon stops'
         self.message(data, title)
 
@@ -177,7 +177,7 @@ class GtkStatusIcon(object):
 
     def show_daemon_status(self, data):
         '''Show message status about the daemon'''
-        title = "Daemon"
+        title = 'Daemon'
         data = daemon_status()
         self.message(data, title)
 
