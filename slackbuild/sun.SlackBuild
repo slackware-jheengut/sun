@@ -70,22 +70,19 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
  -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# avoid install configuration files over setup.py
-sed -i 's/if "install"/if ""/' setup.py
-
 python3 setup.py install --root=$PKG
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-mkdir -p $PKG/etc/$PRGNAM
+# mkdir -p $PKG/etc/$PRGNAM
 # install configurations files
-install -D -m0644 conf/${PRGNAM}.conf $PKG/etc/$PRGNAM/${PRGNAM}.conf.new
+# install -D -m0644 conf/${PRGNAM}.conf $PKG/etc/$PRGNAM/${PRGNAM}.conf.new
 
 # install notify icon and .desktop file
-mkdir -p $PKG/usr/share/pixmaps $PKG/usr/share/applications
-install -D -m0644 icon/${PRGNAM}.png $PKG/usr/share/pixmaps/${PRGNAM}.png
-install -D -m0644 ${PRGNAM}.desktop $PKG/usr/share/applications/${PRGNAM}.desktop
+#mkdir -p $PKG/usr/share/pixmaps $PKG/usr/share/applications
+#install -D -m0644 icon/${PRGNAM}.png $PKG/usr/share/pixmaps/${PRGNAM}.png
+#install -D -m0644 ${PRGNAM}.desktop $PKG/usr/share/applications/${PRGNAM}.desktop
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a README.rst CHANGES.md LICENSE.txt i3-WM $PKG/usr/doc/$PRGNAM-$VERSION

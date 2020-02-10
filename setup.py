@@ -54,9 +54,9 @@ setup(
     author=__author__,
     author_email=__email__,
     package_data={'': ['LICENSE.txt', 'README.rst', 'CHANGES.md']},
-    data_files=[('conf/sun.conf', [conf_path]),
-                ('icon/sun.png', [icon_path]),
-                ('sun.desktop', [desktop_path])],
+    data_files=[(conf_path, ['conf/sun.conf']),
+                (icon_path, ['icon/sun.png']),
+                (desktop_path, ['sun.desktop'])],
     url='https://gitlab.com/dslackw/sun',
     install_requires=INSTALLATION_REQUIREMENTS,
     extras_require={
