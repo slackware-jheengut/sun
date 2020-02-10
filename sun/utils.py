@@ -39,7 +39,7 @@ def url_open(link):
     '''Return urllib urlopen'''
     try:
         http = urllib3.PoolManager()
-        return http.request('GET', link)
+        con = http.request('GET', link)
     except urllib3.exceptions.NewConnectionError as e:
         print(e)
     except ValueError:
@@ -47,13 +47,13 @@ def url_open(link):
     except KeyboardInterrupt:
         print('')
         raise SystemExit()
+    return con
 
 
 def read_file(registry):
     '''Return reading file'''
     with open(registry, 'r', encoding='utf-8') as file_txt:
         read_file = file_txt.read()
-        file_txt.close()
         return read_file
 
 
@@ -88,10 +88,9 @@ def read_config(config):
 
 def mirror():
     '''Get mirror from slackpkg mirrors file'''
-    slack_mirror = read_config(
-        read_file('{0}{1}'.format(etc_slackpkg, 'mirrors')))
+    slack_mirror = read_config(read_file(f'{etc_slackpkg}mirrors'))
     if slack_mirror:
-        return slack_mirror + changelog_txt
+        return f'{slack_mirror}{changelog_txt}'
     else:
         print('\nYou do not have any mirror selected in /etc/slackpkg/mirrors'
               '\nPlease edit that file and uncomment ONE mirror.\n')
@@ -133,7 +132,7 @@ def config():
         'INTERVAL': 60,
         'STANDBY': 3
     }
-    config_file = read_file('{0}{1}'.format(conf_path, 'sun.conf'))
+    config_file = read_file(f'{conf_path}sun.conf')
     for line in config_file.splitlines():
         line = line.lstrip()
         if line and not line.startswith('#'):
