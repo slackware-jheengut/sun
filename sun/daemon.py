@@ -39,7 +39,7 @@ from sun.utils import config, fetch, mirror
 from sun.__metadata__ import __all__, icon_path
 
 
-class Notify(object):
+class Notify:
     '''Main notify Class'''
     def __init__(self):
         notify2.uninit()
@@ -55,11 +55,11 @@ class Notify(object):
 
     def gtk_loaded(self):
         '''Check if gtk icon running'''
-        out = subprocess.getoutput('ps -A')
+        out = subprocess.getoutput('ps -a')
         if 'sun_gtk' in out:
             return True
 
-    def show(self):
+    def show_notify(self):
         '''Startup dbus message if packages'''
         if self.pkg_count > 0 and self.gtk_loaded():
             self.n.show()     # show notification
@@ -79,7 +79,8 @@ def main():
         except ValueError as e:
             print(e)
         if connection:
-            Notify().show()
+            n = Notify()
+            n.show_notify()
             time.sleep(60 * int(config()['INTERVAL']))
 
 

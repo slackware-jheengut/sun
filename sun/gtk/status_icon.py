@@ -117,8 +117,8 @@ class GtkStatusIcon(object):
                                 buttons=Gtk.ButtonsType.CLOSE)
         msg.set_resizable(0)
         msg.set_title(title)
-
         msg.format_secondary_text(data)
+        msg.set_icon_from_file(self.sun_icon)
         msg.run()
         msg.destroy()
 
@@ -143,6 +143,7 @@ class GtkStatusIcon(object):
         about_dialog = Gtk.AboutDialog()
         about_dialog.set_destroy_with_parent(True)
         about_dialog.set_name('SUN - About')
+        about_dialog.set_icon_from_file(self.sun_icon)
         about_dialog.set_program_name('SUN - Slackware Update Notifier')
         about_dialog.set_version(__version__)
         about_dialog.set_authors([f'{__author__} <{__email__}>'])
