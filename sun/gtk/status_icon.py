@@ -22,13 +22,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import pygtk
-pygtk.require("2.0")
-import gtk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+from gi.repository.GdkPixbuf import Pixbuf
 import subprocess
-from sun.licenses import (
-    lic, abt
-)
+from sun.licenses import lic, abt
 from sun.__metadata__ import (
     __all__,
     __email__,
@@ -38,220 +37,150 @@ from sun.__metadata__ import (
     bin_path,
     icon_path
 )
-from sun.cli.tool import (
-    check_updates,
-    daemon_status
-)
-from sun.utils import (
-    os_info
-)
-
+from sun.cli.tool import check_updates, daemon_status
+from sun.utils import os_info
 
 
 class GtkStatusIcon(object):
 
     def __init__(self):
-        self.dialog_title = ""
-        self.daemon_STOCK = gtk.STOCK_YES
-        self.sun_icon = "{0}{1}.png".format(icon_path, __all__)
-        self.icon = gtk.status_icon_new_from_file(self.sun_icon)
-        self.icon.connect("popup-menu", self.right_click)
-        self.img = gtk.Image()
-        self.img.set_from_file(self.sun_icon)
-        self.icon.set_tooltip("Slackware Update Notifier")
+        self.sun_icon = f'{icon_path}{__all__}.png'
+        self.statusicon = Gtk.StatusIcon()
+        self.statusicon.set_from_file(self.sun_icon)
+        self.statusicon.connect('popup-menu', self.right_click_event)
         self.cmd = "{0}sun_daemon".format(bin_path)
-        self.daemon_start()
-        gtk.main()
+        self.init_daemon()
 
-    def daemon_start(self):
-        """Start daemon when gtk loaded
-        """
-        if daemon_status() == "SUN not running":
-            subprocess.call("{0} &".format(self.cmd), shell=True)
+    def init_daemon(self):
+        '''Start daemon when gtk loaded'''
+        if daemon_status() == 'SUN not running':
+            subprocess.call(f'{self.cmd} &', shell=True)
+            return 'Daemon Starts'
+        else:
+            return 'Daemon is already running...'
 
-    def sub_menu(self):
-        """Create daemon submenu
-        """
-        submenu = gtk.Menu()
-        self.start = gtk.ImageMenuItem("Start")
-        self.stop = gtk.ImageMenuItem("Stop")
-        self.restart = gtk.ImageMenuItem("Restart")
-        self.status = gtk.ImageMenuItem("Status")
+    def right_click_event(self, icon, button, time):
+        self.menu = Gtk.Menu()
 
-        self.start.show()
-        self.stop.show()
-        self.restart.show()
-        self.status.show()
+        submenu = Gtk.Menu()
+        start = Gtk.MenuItem()
+        start.set_label('Start')
+        start.connect('activate', self.daemon_start,)
+        stop = Gtk.MenuItem()
+        stop.set_label('Stop')
+        stop.connect('activate', self.daemon_stop)
+        restart = Gtk.MenuItem()
+        restart.set_label('Restart')
+        restart.connect('activate', self.daemon_restart)
+        status = Gtk.MenuItem()
+        status.set_label('Status')
+        status.connect('activate', self.show_daemon_status)
+        submenu.append(start)
+        submenu.append(stop)
+        submenu.append(restart)
+        submenu.append(status)
+        daemon = Gtk.MenuItem()
+        daemon.set_label('Daemon')
+        daemon.set_submenu(submenu)
+        self.menu.append(daemon)
 
-        img_Start = gtk.image_new_from_stock(gtk.STOCK_MEDIA_PLAY,
-                                             gtk.ICON_SIZE_MENU)
-        img_Start.show()
-        self.start.set_image(img_Start)
+        check = Gtk.MenuItem()
+        check.set_label('Check Updates')
+        check.connect('activate', self.show_check_updates)
+        self.menu.append(check)
 
-        img_Stop = gtk.image_new_from_stock(gtk.STOCK_STOP,
-                                            gtk.ICON_SIZE_MENU)
-        img_Stop.show()
-        self.stop.set_image(img_Stop)
+        osInfo = Gtk.MenuItem()
+        osInfo.set_label('OS Info')
+        osInfo.connect('activate', self.show_os_info)
+        self.menu.append(osInfo)
 
-        img_Restart = gtk.image_new_from_stock(gtk.STOCK_REFRESH,
-                                               gtk.ICON_SIZE_MENU)
-        img_Restart.show()
-        self.restart.set_image(img_Restart)
+        about = Gtk.MenuItem()
+        about.set_label('About')
+        about.connect('activate', self.show_about_dialog)
+        self.menu.append(about)
 
-        img_Status = gtk.image_new_from_stock(gtk.STOCK_DIALOG_QUESTION,
-                                              gtk.ICON_SIZE_MENU)
-        img_Status.show()
-        self.status.set_image(img_Status)
+        sep = Gtk.SeparatorMenuItem()
+        self.menu.append(sep)
 
-        submenu.append(self.start)
-        submenu.append(self.stop)
-        submenu.append(self.restart)
-        submenu.append(self.status)
+        quit = Gtk.MenuItem()
+        quit.set_label('Quit')
+        quit.connect('activate', Gtk.main_quit)
+        self.menu.append(quit)
 
-        self.daemon = gtk.ImageMenuItem("Daemon")
-        self.img_daemon = gtk.image_new_from_stock(self.daemon_STOCK,
-                                                   gtk.ICON_SIZE_MENU)
-        self.img_daemon.show()
-        self.daemon.set_submenu(submenu)
+        self.menu.show_all()
 
-    def menu(self, event_button, event_time, data=None):
-        """Create popup menu
-        """
-        self.sub_menu()
-        menu = gtk.Menu()
-        menu.append(self.daemon)
+        self.menu.popup(None, None, None, self.statusicon, button, time)
 
-        separator = gtk.SeparatorMenuItem()
-
-        menu_Check = gtk.ImageMenuItem("Check updates")
-        img_Check = gtk.image_new_from_stock(gtk.STOCK_OK,
-                                             gtk.ICON_SIZE_MENU)
-        img_Check.show()
-
-        menu_Info = gtk.ImageMenuItem("OS Info")
-        img_Info = gtk.image_new_from_stock(gtk.STOCK_INFO,
-                                            gtk.ICON_SIZE_MENU)
-        img_Info.show()
-
-        menu_About = gtk.ImageMenuItem("About")
-        img_About = gtk.image_new_from_stock(gtk.STOCK_ABOUT,
-                                             gtk.ICON_SIZE_MENU)
-        img_About.show()
-
-        self.daemon.set_image(self.img_daemon)
-        menu.append(self.daemon)
-        self.daemon.show()
-
-        menu_Quit = gtk.ImageMenuItem("Quit")
-        img_Quit = gtk.image_new_from_stock(gtk.STOCK_QUIT, gtk.ICON_SIZE_MENU)
-        img_Quit.show()
-
-        menu_Check.set_image(img_Check)
-        menu_Info.set_image(img_Info)
-        menu_About.set_image(img_About)
-        menu_Quit.set_image(img_Quit)
-
-        menu.append(menu_Check)
-        menu.append(menu_Info)
-        menu.append(separator)
-        menu.append(menu_About)
-        menu.append(menu_Quit)
-
-        separator.show()
-        menu_Check.show()
-        menu_Info.show()
-        menu_About.show()
-        menu_Quit.show()
-
-        menu_Check.connect_object("activate", self._Check, " ")
-        menu_Info.connect_object("activate", self._Info, "OS Info")
-        menu_About.connect_object("activate", self._About, "SUN")
-        self.start.connect_object("activate", self._start, "Start daemon   ")
-        self.stop.connect_object("activate", self._stop, "Stop daemon   ")
-        self.restart.connect_object("activate", self._restart,
-                                    "Restart daemon   ")
-        self.status.connect_object("activate", self._status, daemon_status())
-        menu_Quit.connect_object("activate", self._Quit, "stop")
-
-        menu.popup(None, None, None, event_button, event_time, data)
-
-    def message(self, data):
-        """Function to display messages to the user
-        """
-        msg = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,
-                                gtk.BUTTONS_CLOSE, data)
+    def message(self, data, title):
+        '''Method to display messages to the user'''
+        msg = Gtk.MessageDialog(type=Gtk.MessageType.INFO,
+                                buttons=Gtk.ButtonsType.CLOSE)
         msg.set_resizable(1)
-        msg.set_title(self.dialog_title)
-        self.img.set_from_file(self.sun_icon)
-        msg.set_image(self.img)
-        msg.show_all()
+        msg.set_title(title)
+
+        msg.format_secondary_text(data)
         msg.run()
         msg.destroy()
 
-    def right_click(self, data, event_button, event_time):
-        """Right click handler
-        """
-        self.menu(event_button, event_time, data)
-
-    def _Check(self, data):
-        self.dialog_title = "SUN - Check updates"
+    def show_check_updates(self, widget):
+        '''Show message updates'''
+        title = 'SUN - Check Updates'
         msg, count, packages = check_updates()
         data = msg
         if count > 0:
             if len(packages) > 10:
-                packages = packages[:10] + ["and more..."]
-            self.message("{0} \n{1}".format(data, "\n".join(packages)))
+                packages = packages[:10] + ['and more...']
+            self.message('{0} \n{1}'.format(data, '\n'.join(packages)))
         else:
-            self.message(data)
+            self.message(data, title)
 
-    def _Info(self, data):
-        self.dialog_title = "SUN - " + data
-        self.message(os_info())
+    def show_os_info(self, data):
+        '''Show message OS info'''
+        title = "SUN - OS Info"
+        self.message(os_info(), title)
 
-    def _About(self, data):
-        about = gtk.AboutDialog()
-        about.set_destroy_with_parent(True)
-        about.set_program_name(data)
-        about.set_version(__version__)
-        about.set_authors(["{0} <{1}>".format(__author__, __email__)])
-        about.set_license("\n".join(lic))
-        about.set_comments(abt)
-        about.set_website(__website__)
-        about.set_logo(gtk.gdk.pixbuf_new_from_file(self.sun_icon))
-        about.run()
-        about.destroy()
+    def show_about_dialog(self, widget):
+        '''Show message About info'''
+        about_dialog = Gtk.AboutDialog()
+        about_dialog.set_destroy_with_parent(True)
+        about_dialog.set_name("SUN - About")
+        about_dialog.set_program_name("SUN")
+        about_dialog.set_version(__version__)
+        about_dialog.set_authors([f"{__author__} <{__email__}>"])
+        about_dialog.set_license("\n".join(lic))
+        about_dialog.set_website(__website__)
+        about_dialog.set_logo(Pixbuf.new_from_file(self.sun_icon))
+        about_dialog.set_comments(abt)
+        about_dialog.run()
+        about_dialog.destroy()
 
-    def _start(self, data):
-        self.dialog_title = "Daemon"
-        subprocess.call("{0} &".format(self.cmd), shell=True)
-        self.daemon_STOCK = gtk.STOCK_YES
-        self.message(data)
+    def daemon_start(self, data):
+        '''Show message and start the daemon'''
+        title = 'Daemon'
+        data = self.init_daemon()
+        self.message(data, title)
 
-    def _stop(self, data):
-        self.dialog_title = "Daemon"
+    def daemon_stop(self, data):
+        '''Show message and stop the daemon'''
+        title = "Daemon"
         subprocess.call("killall sun_daemon", shell=True)
-        self.daemon_STOCK = gtk.STOCK_MEDIA_RECORD
-        self.message(data)
+        data = 'Daemon stops'
+        self.message(data, title)
 
-    def _restart(self, data):
-        self.dialog_title = "Daemon"
-        subprocess.call("killall sun_daemon", shell=True)
-        subprocess.call("{0} &".format(self.cmd), shell=True)
-        self.daemon_STOCK = gtk.STOCK_YES
-        self.message(data)
+    def daemon_restart(self, data):
+        '''Show message and restart the daemon'''
+        title = 'Daemon'
+        subprocess.call('killall sun_daemon', shell=True)
+        subprocess.call(f'{self.cmd} &', shell=True)
+        data = 'Daemon restarts'
+        self.message(data, title)
 
-    def _status(self, data):
-        self.dialog_title = "Daemon"
-        self.message(data + " " * 3)
-
-    def _Quit(self, data):
-        del data
-        gtk.main_quit()
+    def show_daemon_status(self, data):
+        '''Show message status about the daemon'''
+        title = "Daemon"
+        data = daemon_status()
+        self.message(data, title)
 
 
-def main():
-
-    GtkStatusIcon()
-
-if __name__ == "__main__":
-    main()
+GtkStatusIcon()
+Gtk.main()

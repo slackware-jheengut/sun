@@ -32,9 +32,10 @@
 """
 
 import time
-import urllib2
+import urllib
+from urllib.request import urlopen
 import notify2
-import commands
+import subprocess
 from sun.utils import (
     config,
     fetch,
@@ -64,7 +65,8 @@ class Notify(object):
     def gtk_loaded(self):
         """Check if gtk icon running
         """
-        out = commands.getoutput("ps -A")
+        out = subprocess.getoutput("ps -A")
+        print(out)
         if "sun_gtk" in out:
             return True
 
@@ -81,8 +83,8 @@ def main():
         connection = True
         time.sleep(1)
         try:
-            urllib2.urlopen(mirror())
-        except urllib2.URLError:
+            urlopen(mirror())
+        except urllib.error.URLError:
             connection = False
         except ValueError:
             pass
