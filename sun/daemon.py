@@ -56,7 +56,6 @@ class Notify(object):
     def gtk_loaded(self):
         '''Check if gtk icon running'''
         out = subprocess.getoutput('ps -A')
-        print(out)
         if 'sun_gtk' in out:
             return True
 

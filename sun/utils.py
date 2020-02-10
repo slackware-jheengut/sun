@@ -103,9 +103,8 @@ def fetch():
     mir, r, slackpkg_last_date = mirror(), '', ''
     count, upgraded = 0, []
     if mir:
-        tar = url_open(mir)
         try:
-            r = tar.read()
+            r = url_open(mir).data
         except AttributeError:
             print("sun: error: can't read mirror")
     if os.path.isfile(var_lib_slackpkg + changelog_txt):

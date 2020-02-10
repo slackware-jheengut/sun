@@ -115,7 +115,7 @@ class GtkStatusIcon(object):
         '''Method to display messages to the user'''
         msg = Gtk.MessageDialog(type=Gtk.MessageType.INFO,
                                 buttons=Gtk.ButtonsType.CLOSE)
-        msg.set_resizable(1)
+        msg.set_resizable(0)
         msg.set_title(title)
 
         msg.format_secondary_text(data)
@@ -125,16 +125,15 @@ class GtkStatusIcon(object):
     def show_check_updates(self, widget):
         '''Show message updates'''
         title = 'SUN - Check Updates'
-        msg, count, packages = check_updates()
-        data = msg
+        data, count, packages = check_updates()
         if count > 0:
             if len(packages) > 10:
-                packages = packages[:10] + ['and more...']
-            self.message('{0} \n{1}'.format(data, '\n'.join(packages)))
+                packages = packages[:10] + ['\nand more...']
+            self.message('{0}\n{1}'.format(data, '\n'.join(packages)), title)
         else:
             self.message(data, title)
 
-    def show_os_info(self, data):
+    def show_os_info(self, widget):
         '''Show message OS info'''
         title = 'SUN - OS Info'
         self.message(os_info(), title)
@@ -154,20 +153,20 @@ class GtkStatusIcon(object):
         about_dialog.run()
         about_dialog.destroy()
 
-    def daemon_start(self, data):
+    def daemon_start(self, widget):
         '''Show message and start the daemon'''
         title = 'Daemon'
         data = self.init_daemon()
         self.message(data, title)
 
-    def daemon_stop(self, data):
+    def daemon_stop(self, widget):
         '''Show message and stop the daemon'''
         title = 'Daemon'
         subprocess.call('killall sun_daemon', shell=True)
         data = 'Daemon stops'
         self.message(data, title)
 
-    def daemon_restart(self, data):
+    def daemon_restart(self, widget):
         '''Show message and restart the daemon'''
         title = 'Daemon'
         subprocess.call('killall sun_daemon', shell=True)
@@ -175,7 +174,7 @@ class GtkStatusIcon(object):
         data = 'Daemon restarts'
         self.message(data, title)
 
-    def show_daemon_status(self, data):
+    def show_daemon_status(self, widget):
         '''Show message status about the daemon'''
         title = 'Daemon'
         data = daemon_status()
