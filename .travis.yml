@@ -8,5 +8,5 @@ notifications:
 python:
   - "3.7"
 script:
-  - pip install -r requirements.txt
+  - pip install sun
 # python -m pytest tests/

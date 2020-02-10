@@ -4,7 +4,4 @@
 # slpkg
 # dbus-python3
 # pygobject3-python3
-dbus-python >= 1.2.4
-notify2 >= 0.3.1
-# PyGObject >= 3.18.2
 
