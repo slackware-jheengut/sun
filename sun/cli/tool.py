@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # sun is a part of sun.
@@ -36,94 +36,88 @@ from sun.__metadata__ import (
 
 
 def su():
-    """Display message when sun execute as root
-    """
-    if getpass.getuser() == "root":
-        print("sun: Error: It should not be run as root")
+    '''Display message when sun execute as root'''
+    if getpass.getuser() == 'root':
+        print('sun: Error: It should not be run as root')
         raise SystemExit()
 
 
 def usage():
-    """SUN arguments
-    """
+    '''SUN arguments'''
     args = [
-        "SUN (Slackware Update Notifier) - Version: {0}\n".format(__version__),
-        "Usage: sun [OPTION]\n",
-        "Optional arguments:",
-        "  help     display this help and exit",
-        "  start    start sun daemon",
-        "  stop     stop sun daemon",
-        "  restart  restart sun daemon",
-        "  check    check for software updates",
-        "  status   sun daemon status",
-        "  info     Os information"
+        'SUN (Slackware Update Notifier) - Version: {0}\n'.format(__version__),
+        'Usage: sun [OPTION]\n',
+        'Optional arguments:',
+        '  help     display this help and exit',
+        '  start    start sun daemon',
+        '  stop     stop sun daemon',
+        '  restart  restart sun daemon',
+        '  check    check for software updates',
+        '  status   sun daemon status',
+        '  info     Os information'
     ]
     for opt in args:
-        print("{0}".format(opt))
+        print('{0}'.format(opt))
 
 
 def check_updates():
-    """Check and display upgraded packages
-    """
+    '''Check and display upgraded packages'''
     count, packages = fetch()
-    message = "No news is good news !"
+    message = 'No news is good news !'
     if count > 0:
-        message = ("{0} software updates are available\n".format(count))
+        message = ('{0} software updates are available\n'.format(count))
     return [message, count, packages]
 
 
 def daemon_status():
-    """Display sun daemon status
-    """
-    out = subprocess.getoutput("ps -A")
-    message = "SUN not running"
-    if "sun_daemon" in out:
-        message = "SUN is running..."
+    '''Display sun daemon status'''
+    out = subprocess.getoutput('ps -A')
+    message = 'SUN not running'
+    if 'sun_daemon' in out:
+        message = 'SUN is running...'
     return message
 
 
 def _init_check_upodates():
-    """Sub function for init
-    """
+    '''Sub function for init'''
     message, count, packages = check_updates()
     if count > 0:
         print(message)
         for pkg in packages:
-            print("{0}".format(pkg))
+            print('{0}'.format(pkg))
     else:
         print(message)
 
 
 def init():
-    """Initialization , all begin from here
-    """
+    '''Initialization , all begin from here'''
     su()
     args = sys.argv
     args.pop(0)
-    cmd = "{0}sun_daemon".format(bin_path)
+    cmd = '{0}sun_daemon'.format(bin_path)
     if len(args) == 1:
-        if args[0] == "start":
-            print("Starting SUN daemon:  {0} &".format(cmd))
-            subprocess.call("{0} &".format(cmd), shell=True)
-        elif args[0] == "stop":
-            print("Stopping SUN daemon:  {0}".format(cmd))
-            subprocess.call("killall sun_daemon", shell=True)
-        elif args[0] == "restart":
-            print("Stopping SUN daemon:  {0}".format(cmd))
-            subprocess.call("killall sun_daemon", shell=True)
-            print("Starting SUN daemon:  {0} &".format(cmd))
-            subprocess.call("{0} &".format(cmd), shell=True)
-        elif args[0] == "check":
+        if args[0] == 'start':
+            print('Starting SUN daemon:  {0} &'.format(cmd))
+            subprocess.call('{0} &'.format(cmd), shell=True)
+        elif args[0] == 'stop':
+            print('Stopping SUN daemon:  {0}'.format(cmd))
+            subprocess.call('killall sun_daemon', shell=True)
+        elif args[0] == 'restart':
+            print('Stopping SUN daemon:  {0}'.format(cmd))
+            subprocess.call('killall sun_daemon', shell=True)
+            print('Starting SUN daemon:  {0} &'.format(cmd))
+            subprocess.call('{0} &'.format(cmd), shell=True)
+        elif args[0] == 'check':
             _init_check_upodates()
-        elif args[0] == "status":
+        elif args[0] == 'status':
             print(daemon_status())
-        elif args[0] == "help":
+        elif args[0] == 'help':
             usage()
-        elif args[0] == "info":
+        elif args[0] == 'info':
             print(os_info())
         else:
             print("try: 'sun help'")
-    elif len(args) == 2 and args[0] == "start" and args[1] == "--gtk":
-        subprocess.call("{0} {1}".format(cmd, "start--gtk"), shell=True)
+    elif len(args) == 2 and args[0] == 'start' and args[1] == '--gtk':
+        subprocess.call('{0} {1}'.format(cmd, 'start--gtk'), shell=True)
     else:
         print("try: 'sun help'")
