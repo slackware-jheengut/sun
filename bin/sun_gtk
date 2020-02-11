@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# sun is a part of sun.
+# sun_gtk is a part of sun.
 
 # Copyright 2015-2020 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
@@ -30,10 +30,11 @@
 |____/ \___/|_| \_|
 '''
 
-from sun.cli.tool import init
+from sun.gtk.status_icon import main
 
-try:
-    init()
-except KeyboardInterrupt:
-    print('')
-    raise SystemExit()
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('')
+        raise SystemExit()

@@ -1,15 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # setup.py file is part of sun.
 
-# Copyright 2015 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
+# Copyright 2015-2020 Dimitris Zlatanidis <d.zlatanidis@gmail.com>
 # All rights reserved.
 
 # sun is a tray notification applet for informing about
 # package updates in Slackware.
 
-# https://github.com/dslackw/sun
+# https://gitlab.com/dslackw/sun
 
 # sun is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as published by
@@ -22,64 +22,60 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import sys
-import shutil
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 from sun.__metadata__ import (
-    __all__,
-    __version__,
-    __email__,
-    __author__,
-    conf_path,
-    icon_path,
-    bin_path,
-    rc_path
+    __all__, __version__,
+    __email__, __author__,
+    conf_path, icon_path,
+    desktop_path
 )
+
+INSTALLATION_REQUIREMENTS = [
+    'urllib3>=1.25.7'
+    'dbus-python>=1.2.4',
+    'notify2>=0.3.1',
+    'pygobject>=3.18.2'
+    ]
+DOCS_REQUIREMENTS = []
+TESTS_REQUIREMENTS = []
+OPTIONAL_REQUIREMENTS = []
+
 
 setup(
     name=__all__,
-    packages=["sun"],
-    scripts=["bin/sun_daemon", "bin/sun"],
+    packages=['sun', 'sun/gtk', 'sun/cli'],
+    scripts=['bin/sun_daemon', 'bin/sun', 'bin/sun_gtk'],
     version=__version__,
-    description="Tray notification applet for informing about package updates "
-                "in Slackware",
-    keywords=["tray", "notify", "slackware", "desktop"],
+    description='Tray notification applet for informing about package updates '
+                'in Slackware',
+    long_description=open('README.rst').read(),
+    keywords=['tray', 'notify', 'slackware', 'desktop'],
     author=__author__,
     author_email=__email__,
-    url="https://github.com/dslackw/sun",
-    package_data={"": ["LICENSE", "README.rst", "ChangeLog.txt"]},
+    package_data={'': ['LICENSE.txt', 'README.rst', 'CHANGES.md']},
+    data_files=[(conf_path, ['conf/sun.conf']),
+                (icon_path, ['icon/sun.png']),
+                (desktop_path, ['sun.desktop'])],
+    url='https://gitlab.com/dslackw/sun',
+    install_requires=INSTALLATION_REQUIREMENTS,
+    extras_require={
+        'optional': OPTIONAL_REQUIREMENTS,
+        'docs': DOCS_REQUIREMENTS,
+        'tests': TESTS_REQUIREMENTS,
+    },
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Classifier: Development Status :: 3 - Alpha",
-        "License :: OSI Approved :: GNU General Public License v3 or later "
-        "(GPLv3+)",
-        "Classifier: Operating System :: Unix",
-        "Classifier: Programming Language :: Python",
-        "Classifier: Programming Language :: Python :: 2.5",
-        "Classifier: Programming Language :: Python :: 2.6",
-        "Classifier: Programming Language :: Python :: 2.7",
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: GNU General Public License v3 or later',
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python :: 3.7',
+        'Topic :: Desktop Environment',
+        'Topic :: System :: Monitoring',
+        'Topic :: System :: Software Distribution',
+        'Topic :: System :: Installation/Setup',
+        'Topic :: System :: Systems Administration',
+        'Topic :: System :: Software Distribution',
         ],
-    long_description=open("README.rst").read()
+    python_requires='>=3.7'
 )
-
-if "install" in sys.argv:
-    dirs = [bin_path, conf_path, icon_path, rc_path]
-    for d in dirs:
-        if not os.path.exists(d):
-            os.makedirs(d)
-
-    print("Install sun.conf --> {0}".format(conf_path))
-    shutil.copy2("conf/{0}.conf".format(__all__), conf_path)
-    print("Install mirrors --> {0}".format(conf_path))
-    shutil.copy2("conf/mirrors", conf_path)
-    print("Install rc.sun --> {0}".format(rc_path))
-    shutil.copy2("conf/rc.{0}".format(__all__), rc_path)
-    os.chmod(rc_path + "rc.sun", 0755)
-    print("Install sun.png --> {0}".format(icon_path))
-    shutil.copy2("icon/{0}.png".format(__all__), icon_path)

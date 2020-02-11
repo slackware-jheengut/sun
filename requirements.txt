@@ -1,2 +1,13 @@
-# Python 2.7.5+
-# pynotify
+# Python 3.7+
+# python-notify2
+# slackpkg
+# slpkg
+# dbus-python3
+# pygobject3-python3
+# python-urllib3
+
+urllib3 >= 1.25.7
+dbus-python >= 1.2.4
+notify2 >= 0.3.1
+PyGObject >= 3.18.2
+
